@@ -1,10 +1,7 @@
 require("bundler/setup")
+require('rack')
 Bundler.require(:default)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
-
-
-require('rickshaw')
-require('rack')
 
 also_reload("lib/*.rb")
 require('pry')
