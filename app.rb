@@ -1,6 +1,11 @@
 require("bundler/setup")
 Bundler.require(:default)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
+
+
+require('rickshaw')
+require('rack')
+
 also_reload("lib/*.rb")
 require('pry')
 
@@ -158,7 +163,7 @@ get('/search') do
   @possible_categories = Category.where("lower(name) LIKE ?", "%#{@keyword}%")
 
 
-  
+
   @event_results = Category.search_event(@possible_categories,@possible_events)
 
 
