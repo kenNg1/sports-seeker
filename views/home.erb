@@ -1,82 +1,23 @@
+<div class="jumbotron">
+
+</div>
+
 <div class="searchbar">
-  <h4><span class="search-text">Find Your Next Event</span></h4>
+  <h4><span class="search-text">Search for a sport</span></h4>
   <form action='/search' method = 'get'>
-    <input type='text' name="search" id ="search" placeholder="Search by event or artist name" width="50">
+    <input type='text' name="keyword" id ="search" placeholder="search for a sport or activity by name (e.g. soccer)" width="50">
     <button type='submit' class="btn search-btn">Search</button>
   </form>
+
   <a id="sell_tickets"></a>
 
-  {% @categories.each() do |category| %}
     <form action='/categorysearch' method='get' class="categories">
-      <button class="btn btn-info" type="submit" value="{%=category.id()%}" name="categorysearch">{%= category.name() %}</button>
+      <button class="btn btn-info">Rugby</button>
+      <button class="btn btn-info">Football</button>
+      <button class="btn btn-info">Track</button>
+      <button class="btn btn-info">Ultimate Frisbee</button>
+      <button class="btn btn-info">Basketball</button>
+      <button class="btn btn-info">Boxing</button>
+      <button class="btn btn-info">Running Club</button>
     </form>
- {% end %}
-</div>
-
-<br>
-<div class="panel panel-primary class">
-  <div class="panel-heading" id="sell_box" style="border: 3px solid;">Sell a ticket! It's fast, easy and free.</div>
-  <div class="panel-body">
-    <form action="/offer" method="post">
-      <label for="event_id">Select a Event</label>
-      <select id='event_id' name='event_id' type='text'>
-        {% @events.each() do |event| %}
-        <option value="{%= event.id()%}"> {%= event.name() %} </option>
-        {% end %}
-      </select>
-
-      <label for="price">Price:</label>
-      <input id="price" name="price" type="number">
-
-
-
-   <!-- <input type="radio" name="offer" value="false">Buy -->
-    <input type="hidden" name="offer" value= "true">
-
-
-      <button type="submit" class="btn btn-primary">Sell</button>
-    </form>
-  </div>
-</div>
-<!-- offers start here -->
-<div class="panel panel-primary class">
-  <div class="panel-heading" id="sell_box" style="border: 3px solid;">Check out tickets to upcoming events:</div>
-</div>
-    {% @offers.each() do |offer| %}
-
-    		<div class="panel panel-default">
-  				<div class="panel-body">
-
-
-    				<div class="col-md-2">
-    					{%= offer.event.name %}
-    				</div>
-  	      		<div class="col-md-2">
-  	      			HKD {%= offer.price %}
-  	      		</div>
-  	      		<div class="col-md-2">
-
-  	        		<img style="width: 150px;" src="{%= offer.event.imageurl %}">
-
-  	        	</div>
-  	      		<div class="col-md-2">
-                <form action='/user_contact' method='post'>
-                  <input type='hidden' value="{%=offer.user_id%}" name='user_id' id='user_id'>
-                  <input type='hidden' value="{%=offer.id%}" name='offer_id' id='offer_id'>
-
-  	      			  <button action='submit' class="btn btn-success">BUY</button>
-                </form>
-  	      		</div>
-  	      		<div class="col-md-2">
-  	      			<button class="btn btn-info"><a href="/offer/{%=offer.id()%}">View</a></button>
-  	      		</div>
-              <div class="col-md-2">
-                {%= offer.event.date() %}
-
-  	      		</div>
-
-      		</div>
-      	</div>
-    {% end %}
-
 </div>

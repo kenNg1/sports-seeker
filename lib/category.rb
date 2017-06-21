@@ -8,7 +8,8 @@ class Category < ActiveRecord::Base
   def self.search_event(categories,name_events)
     category_events = categories.map {|category| category.events}
     name_events = name_events.map{|event| [event]}
-    result = name_events.concat(category_events)
+    # result = name_events.concat(category_events)
+    result = name_events
     result.delete([])
     result.uniq{|obj| obj.first.id}
   end

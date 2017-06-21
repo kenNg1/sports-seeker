@@ -102,6 +102,8 @@ get("/event/:id") do
   @date = t.strftime("%d-%b-%Y")
   @user = User.find(session[:user_id])
   @friends = @user.find_friends()
+  category_id = CategoryEvent.find(@event.id).category_id
+  @event_category = Category.find(category_id).name
   erb(:event)
 end
 
@@ -152,8 +154,14 @@ get('/search') do
   @keyword = params.fetch('keyword').downcase
   @possible_users = User.where("lower(name) LIKE ? OR lower(username) LIKE?", "%#{@keyword}%", "%#{@keyword}%")
   @possible_events = Event.where("lower(name) LIKE ?", "%#{@keyword}%")
+  # workaround to switch off possible categories results as it doesn't work yet
   @possible_categories = Category.where("lower(name) LIKE ?", "%#{@keyword}%")
+
+
+  
   @event_results = Category.search_event(@possible_categories,@possible_events)
+
+
   erb(:search_result)
 end
 
