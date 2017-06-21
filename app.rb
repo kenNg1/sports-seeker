@@ -12,10 +12,7 @@ end
 
 before do
   if params[:username] == nil
-   if session[:user_id] === nil && url != "http://localhost:4567/"
-     redirect("/")
-    end
-    if @user != nil then @user = User.find(session[:user_id])
+    if @user != nil then @user = User.find(1)
     end
   end
 end
